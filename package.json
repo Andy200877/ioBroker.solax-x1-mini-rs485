@@ -1,0 +1,58 @@
+{
+  "name": "iobroker.solax-x1-mini-rs485",
+  "version": "0.0.1",
+  "description": "Livedaten des Solax X1 mini Wechselrichters über RS485",
+  "author": {
+    "name": "Andreas Borchert",
+    "email": "Andy200877@arcor.de"
+  },
+  "homepage": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485",
+  "license": "MIT",
+  "keywords": [
+    "solax",
+    "x1",
+    "rs485",
+    "modbus",
+    "rs232"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.5.1"
+  },
+  "devDependencies": {
+    "@iobroker/testing": "^2.5.2",
+    "@types/chai": "^4.2.22",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/gulp": "^4.0.9",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^14.17.34",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^10.0.6",
+    "@types/sinon-chai": "^3.2.5",
+    "axios": "^0.24.0",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.3.0",
+    "gulp": "^4.0.2",
+    "mocha": "^9.1.3",
+    "proxyquire": "^2.1.3",
+    "sinon": "^12.0.1",
+    "sinon-chai": "^3.7.0"
+  },
+  "main": "main.js",
+  "scripts": {
+    "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit",
+    "test": "npm run test:js && npm run test:package",
+    "lint": "eslint"
+  },
+  "bugs": {
+    "url": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485/issues"
+  },
+  "readmeFilename": "README.md"
+}
