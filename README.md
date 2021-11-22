@@ -40,7 +40,8 @@ Ich habe ein altes Netzwerkkabel durchgeschnitten und den RS485/USB Konverter wi
 
 ```RJ45 Pin 4 (Blau) <--> Adapter Anschluss A+
 RJ45 Pin 5 (Blau-Weiß) <--> Adapter Anschluss B-
-RJ45 Pin 7 (Braun-Weiß) <--> Adapter Anschluss GND```
+RJ45 Pin 7 (Braun-Weiß) <--> Adapter Anschluss GND
+```
 
 ## Changelog
 
