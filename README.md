@@ -37,7 +37,7 @@ Abends / Nachts (wenn keine Sonne scheint) schaltet sich der Solax X1 mini Wechs
 
 <b>Hardware Anschluss</b>
 Ich habe ein altes Netzwerkkabel durchgeschnitten und den RS485/USB Konverter wie folgt mit der RJ45 Buchse des Wechselrichters verbunden :
-
+(admin/solax-x1-mini-rs485.png)
 ```
 RJ45 Pin 4 (Blau) <--> Adapter Anschluss A+
 RJ45 Pin 5 (Blau-Weiß) <--> Adapter Anschluss B-
