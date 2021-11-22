@@ -4,7 +4,7 @@
 systemDictionary = {
     'solax-x1-mini-rs485 adapter settings': {
         'en': 'Adapter settings for solax-x1-mini-rs485',
-        'de': 'Adaptereinstellungen für solax-x1-mini-rs485',
+        'de': 'Adaptereinstellungen für Solax-X1-mini-RS485',
         'ru': 'Настройки адаптера для solax-x1-mini-rs485',
         'pt': 'Configurações do adaptador para solax-x1-mini-rs485',
         'nl': 'Adapterinstellingen voor solax-x1-mini-rs485',
@@ -14,9 +14,9 @@ systemDictionary = {
         'pl': 'Ustawienia adaptera dla solax-x1-mini-rs485',
         'zh-cn': 'solax-x1-mini-rs485的适配器设置'
     },
-    'option1': {
-        'en': 'option1',
-        'de': 'Option 1',
+    'tty': {
+        'en': 'serial port',
+        'de': 'serieller Anschluss',
         'ru': 'Опция 1',
         'pt': 'Opção 1',
         'nl': 'Optie 1',
@@ -26,9 +26,9 @@ systemDictionary = {
         'pl': 'opcja 1',
         'zh-cn': '选项1'
     },
-    'option2': {
-        'en': 'option2',
-        'de': 'Option 2',
+    'timeout': {
+        'en': 'timeout for request livedata',
+        'de': 'Timeout für Abfrage der Livedaten',
         'ru': 'option2',
         'pt': 'opção 2',
         'nl': 'Optie 2',
