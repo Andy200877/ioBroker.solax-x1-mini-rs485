@@ -267,9 +267,11 @@ function main() {
 					
 					Live_Data_hex[15] = informationen.slice(64,68)
 					Live_Data_ascii[15] = Buffer.from(Live_Data_hex[15], 'hex').readUIntBE(0,2); // grid voltage fault
+					Live_Data_ascii[15] = Math.round((parseFloat(Live_Data_ascii[15]) * 0.1)*10)/10
 					
 					Live_Data_hex[16] = informationen.slice(68,72)
 					Live_Data_ascii[16] = Buffer.from(Live_Data_hex[16], 'hex').readUIntBE(0,2); // grid freq  fault
+					Live_Data_ascii[16] = Math.round((parseFloat(Live_Data_ascii[16]) * 0.01)*10)/10
 					
 					Live_Data_hex[17] = informationen.slice(72,76)
 					Live_Data_ascii[17] = Buffer.from(Live_Data_hex[17], 'hex').readUIntBE(0,2); // dc injection fault
@@ -279,9 +281,11 @@ function main() {
 					
 					Live_Data_hex[19] = informationen.slice(80,84)
 					Live_Data_ascii[19] = Buffer.from(Live_Data_hex[19], 'hex').readUIntBE(0,2); // pv1 voltage fault
+					Live_Data_ascii[19] = Math.round((parseFloat(Live_Data_ascii[19]) * 0.1)*10)/10
 					
 					Live_Data_hex[20] = informationen.slice(84,88)
 					Live_Data_ascii[20] = Buffer.from(Live_Data_hex[20], 'hex').readUIntBE(0,2); // pv2 voltage fault
+					Live_Data_ascii[20] = Math.round((parseFloat(Live_Data_ascii[20]) * 0.1)*10)/10
 					
 					Live_Data_hex[21] = informationen.slice(88,92)
 					Live_Data_ascii[21] = Buffer.from(Live_Data_hex[21], 'hex').readUIntBE(0,2); // gfc fault
@@ -475,7 +479,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
 
 
 
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[0], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[0], { //Device Type
         type: 'state',
         common: {
             "name":     Info_Beschreibung[0],
@@ -489,7 +493,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[1], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[1], { //rated Power
         type: 'state',
         common: {
             "name":     Info_Beschreibung[1],
@@ -503,7 +507,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 	
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[2], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[2], { //Firmware Version
         type: 'state',
         common: {
             "name":     Info_Beschreibung[2],
@@ -517,7 +521,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 	
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[3], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[3], { //Modul Name
         type: 'state',
         common: {
             "name":     Info_Beschreibung[3],
@@ -531,7 +535,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[4], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[4], { //Hersteller
         type: 'state',
         common: {
             "name":     Info_Beschreibung[4],
@@ -545,7 +549,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[5], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[5], { //Seriennummer
         type: 'state',
         common: {
             "name":     Info_Beschreibung[5],
@@ -559,7 +563,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[6], {
+    adapter.setObjectNotExists(Wechselrichter + '.Info.' + Info_Objekt[6], { //Rated Bus Voltage
         type: 'state',
         common: {
             "name":     Info_Beschreibung[6],
@@ -574,7 +578,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
     });
 
 // ***************** LIVE ********************
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[0], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[0], {  // temperatur
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[0],
@@ -588,7 +592,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[1], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[1], { // energy today
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[1],
@@ -602,7 +606,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[2], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[2], { // PV1 Voltage
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[2],
@@ -616,7 +620,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[3], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[3], { // PV2 Voltage
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[3],
@@ -630,7 +634,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[4], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[4], { // pv1 current
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[4],
@@ -644,7 +648,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[5], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[5], { // pv2 current
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[5],
@@ -658,7 +662,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[6], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[6], {// PV1 Power
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[6],
@@ -672,7 +676,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[7], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[7], {// PV2 Power
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[7],
@@ -686,7 +690,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[8], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[8], {// ac current
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[8],
@@ -700,7 +704,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[9], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[9], {// ac voltage
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[9],
@@ -714,7 +718,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[10], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[10], {// ac frequency
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[10],
@@ -728,7 +732,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[11], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[11], {// ac power
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[11],
@@ -742,7 +746,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[12], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[12], {// energy total
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[12],
@@ -756,7 +760,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[13], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[13], {// runtime total
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[13],
@@ -769,7 +773,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         },
         native: {}
     });
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[14], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[14], {// mode
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[14],
@@ -783,12 +787,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[15], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[15], { // grid voltage fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[15],
             "type":     "number",
-            "unit":     "",
+            "unit":     "V",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -797,12 +801,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[16], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[16], { // grid freq  fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[16],
             "type":     "number",
-            "unit":     "",
+            "unit":     "Hz",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -811,12 +815,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[17], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[17], { // dc injection fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[17],
             "type":     "number",
-            "unit":     "",
+            "unit":     "mA",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -825,7 +829,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[18], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[18], { // temperature fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[18],
@@ -839,12 +843,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[19], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[19], { // pv1 voltage fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[19],
             "type":     "number",
-            "unit":     "",
+            "unit":     "V",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -854,12 +858,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
     });
 
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[20], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[20], { // pv2 voltage fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[20],
             "type":     "number",
-            "unit":     "",
+            "unit":     "V",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -868,12 +872,12 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[21], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[21], { // gfc fault
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[21],
             "type":     "number",
-            "unit":     "",
+            "unit":     "mA",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -882,7 +886,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[22], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[22], { // error message
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[22],
@@ -896,7 +900,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         native: {}
     });
 
-    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[23], {
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[23], { // Mode text
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[23],
