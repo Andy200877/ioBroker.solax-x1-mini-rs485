@@ -113,8 +113,8 @@ function main() {
 	
 	var Info_Beschreibung = ['Device Type', 'rated Power', 'Firmware Version', 'Modul Name', 'Hersteller', 'Seriennummer', 'Rated Bus Voltage'];
 	var Info_Objekt = ['DeviceType', 'ratedPower', 'FirmwareVersion', 'ModulName', 'Manufacturer', 'Serialnumber', 'RatedBusVoltage'];
-	var Live_Beschreibung = ['Temperatur', 'Produktion heute', 'PV1 Spannung', 'PV2 Spannung', 'PV1 Strom', 'PV2 Strom', 'PV1 Leistung', 'PV2 Leistung', 'AC Strom', 'AC Spannung', 'AC Frequenz', 'AC Leistung', 'Produktion gesamt', 'Laufzeit gesamt', 'Modus', 'Fehler Netzspannung', 'Fehler Netzfrequenz', 'DC Einspeisefehler', 'Temperaturfehler', 'Fehlerhafte PV1 Spannung', 'Fehlerhafte PV2 Spannung', 'GFC-Fehler', 'Fehlermeldung', 'Modus Text'];
-	var Live_Objekt = ['Temperature', 'EnergyToday', 'PV1-Voltage', 'PV2-Voltage', 'PV1-Current', 'PV2-Current', 'PV1-Power', 'PV2-Power', 'AC-Current', 'AC-Voltage', 'AC-Frequency', 'AC-Power', 'EnergyTotal', 'RuntimeTotal','Mode', 'GridVoltageFault', 'GridFreqFault', 'DCinjectionFault', 'TemperatureFault', 'PV1VoltageFault', 'PV2VoltageFault', 'GFCfault', 'ErrorMessage', 'ModeText'];
+	var Live_Beschreibung = ['Temperatur', 'Produktion heute', 'PV1 Spannung', 'PV2 Spannung', 'PV1 Strom', 'PV2 Strom', 'PV1 Leistung', 'PV2 Leistung', 'AC Strom', 'AC Spannung', 'AC Frequenz', 'AC Leistung', 'Produktion gesamt', 'Laufzeit gesamt', 'Modus', 'Fehler Netzspannung', 'Fehler Netzfrequenz', 'DC Einspeisefehler', 'Temperaturfehler', 'Fehlerhafte PV1 Spannung', 'Fehlerhafte PV2 Spannung', 'GFC-Fehler', 'Fehlermeldung', 'Modus Text', 'Fehler Text'];
+	var Live_Objekt = ['Temperature', 'EnergyToday', 'PV1-Voltage', 'PV2-Voltage', 'PV1-Current', 'PV2-Current', 'PV1-Power', 'PV2-Power', 'AC-Current', 'AC-Voltage', 'AC-Frequency', 'AC-Power', 'EnergyTotal', 'RuntimeTotal','Mode', 'GridVoltageFault', 'GridFreqFault', 'DCinjectionFault', 'TemperatureFault', 'PV1VoltageFault', 'PV2VoltageFault', 'GFCfault', 'ErrorMessage', 'ModeText', 'ErrorMessageJson'];
 	
 
 
@@ -291,13 +291,19 @@ function main() {
 					Live_Data_ascii[21] = Buffer.from(Live_Data_hex[21], 'hex').readUIntBE(0,2); // gfc fault
 					
 					Live_Data_hex[22] = informationen.slice(92,100)
-					Live_Data_ascii[22] = Buffer.from(Live_Data_hex[22], 'hex').readUIntBE(0,4); // error message
+					Live_Data_ascii[22] = Buffer.from(Live_Data_hex[22], 'hex').readUIntLE(0,4); // error message
+					Live_Data_ascii[22] = Live_Data_hex[22]
+					
+					//adapter.log.error ( "Error Meldung Text : '" +  error_text(Buffer.from(Live_Data_hex[22], 'hex').readUIntLE(0,4)) + "'");
 					
 					if (Live_Data_ascii[14] == '0') { Live_Data_ascii[23] = "waiting"; }
 					if (Live_Data_ascii[14] == '1') { Live_Data_ascii[23] = "checking"; }
 					if (Live_Data_ascii[14] == '2') { Live_Data_ascii[23] = "working"; }
 					if (Live_Data_ascii[14] == '3') { Live_Data_ascii[23] = "failure"; }
 					Live_Data_hex[23] = "00";
+					Live_Data_hex[24] = Live_Data_hex[22]
+					Live_Data_ascii[24] = error_text(Buffer.from(Live_Data_hex[22], 'hex').readUIntLE(0,4));
+					
 					
 					
 					
@@ -307,6 +313,10 @@ function main() {
 					for (var count = 0; count < Live_Data_hex.length; count++) {
 						adapter.log.debug (count + ".) " + Live_Beschreibung[count] + " = '" + Live_Data_hex[count] + "' (" + Live_Data_hex[count].length + ") (" + Live_Data_ascii[count] + ")");
 					}
+					
+					
+					
+					
 
 					
 									
@@ -392,6 +402,71 @@ function main() {
 }
 
 
+function error_text(mask) {
+	var ERRORS = ['Tz Protection Fault',
+    'Mains Lost Fault',
+    'Grid Voltage Fault',
+    'Grid Frequency Fault',
+    "PLL Lost Fault",
+    "Bus Voltage Fault",
+    "Error Bit 06",          // Byte 0.6
+    "Oscillator Fault",      // Byte 0.7
+
+    "DCI OCP Fault",           // Byte 1.0
+    "Residual Current Fault",  // Byte 1.1
+    "PV Voltage Fault",        // Byte 1.2
+    "Ac10Mins Voltage Fault",  // Byte 1.3
+    "Isolation Fault",         // Byte 1.4
+    "Over Temperature Fault",  // Byte 1.5
+    "Ventilator Fault",        // Byte 1.6
+    "Error Bit 15",            // Byte 1.7
+
+    "SPI Communication Fault",        // Byte 2.0
+    "SCI Communication Fault",        // Byte 2.1
+    "Error Bit 18",                   // Byte 2.2
+    "Input Configuration Fault",      // Byte 2.3
+    "EEPROM Fault",                   // Byte 2.4
+    "Relay Fault",                    // Byte 2.5
+    "Sample Consistence Fault",       // Byte 2.6
+    "Residual-Current Device Fault",  // Byte 2.7
+
+    "Error Bit 24",        // Byte 3.0
+    "Error Bit 25",        // Byte 3.1
+    "Error Bit 26",        // Byte 3.2
+    "Error Bit 27",        // Byte 3.3
+    "Error Bit 28",        // Byte 3.4
+    "DCI Device Fault",    // Byte 3.5
+    "Other Device Fault",  // Byte 3.6
+    "Error Bit 31",        // Byte 3.7
+	];
+	var first = true;
+	var errors_list = "";
+	var anzahl = 0;
+	
+	if (mask) {
+		for (var i = 0; i < 32; i++) {
+			if (mask & (1 << i)) {
+				anzahl ++;
+              if (first) {
+                  first = false;
+                  errors_list += "["
+                  } else {
+                      errors_list += "," ;
+                      }
+                errors_list += '{"nr":';
+                errors_list += anzahl;
+                errors_list += ',"error":"';
+                errors_list += ERRORS[i];
+                errors_list += '"}';
+                }
+        }
+        errors_list += ']';
+    }
+
+  return errors_list;
+}
+
+
 function live_daten_auf_null() {
 
 	adapter.setState(Wechselrichter + '.Live.Temperature', 0, true);
@@ -418,6 +493,7 @@ function live_daten_auf_null() {
 	adapter.setState(Wechselrichter + '.Live.GFCfault', 0, true);
 	adapter.setState(Wechselrichter + '.Live.ErrorMessage', 0, true);
 	//adapter.setState(Wechselrichter + '.Live.ModeText', 0, true);
+	adapter.setState(Wechselrichter + '.Live.ErrorMessageJson', '', true);
 }
 
 
@@ -834,7 +910,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         common: {
 			"name":     Live_Beschreibung[18],
             "type":     "number",
-            "unit":     "",
+            "unit":     "°C",
             "read":     true,
             "write":    false,
             "role":     "value.sensor",
@@ -890,7 +966,7 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         type: 'state',
         common: {
 			"name":     Live_Beschreibung[22],
-            "type":     "number",
+            "type":     "string",
             "unit":     "",
             "read":     true,
             "write":    false,
@@ -913,6 +989,21 @@ function create_wr(Info_Beschreibung, Info_Objekt, Live_Beschreibung, Live_Objek
         },
         native: {}
     });
+
+    adapter.setObjectNotExists(Wechselrichter + '.Live.' + Live_Objekt[24], { // error message text
+        type: 'state',
+        common: {
+			"name":     Live_Beschreibung[24],
+            "type":     "string",
+            "unit":     "",
+            "read":     true,
+            "write":    false,
+            "role":     "value.sensor",
+			"desc":     Live_Beschreibung[24]
+        },
+        native: {}
+    });
+
 
 
 	

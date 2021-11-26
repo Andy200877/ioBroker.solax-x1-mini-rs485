@@ -1,27 +1,38 @@
 {
-  "name": "iobroker.solax-x1-mini-rs485",
-  "version": "0.0.1",
-  "description": "Livedaten des Solax X1 mini Wechselrichters über RS485",
+  "_from": "github:Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+  "_id": "iobroker.solax-x1-mini-rs485@0.0.1",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/iobroker.solax-x1-mini-rs485",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+    "rawSpec": "Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+    "saveSpec": "github:Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+    "fetchSpec": null,
+    "gitCommittish": "31e452c4a528c34f3381bb4222634f35996f78fc"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "github:Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+  "_spec": "Andy200877/ioBroker.solax-x1-mini-rs485#31e452c4a528c34f3381bb4222634f35996f78fc",
+  "_where": "/opt/iobroker",
   "author": {
     "name": "Andreas Borchert",
     "email": "Andy200877@arcor.de"
   },
-  "homepage": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485",
-  "license": "MIT",
-  "keywords": [
-    "solax",
-    "x1",
-    "rs485",
-    "modbus",
-    "rs232"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485"
+  "bugs": {
+    "url": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "@iobroker/adapter-core": "^2.5.1"
   },
+  "deprecated": false,
+  "description": "Livedaten des Solax X1 mini Wechselrichters über RS485",
   "devDependencies": {
     "@iobroker/testing": "^2.5.2",
     "@types/chai": "^4.2.22",
@@ -42,17 +53,28 @@
     "sinon": "^12.0.1",
     "sinon-chai": "^3.7.0"
   },
+  "homepage": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485",
+  "keywords": [
+    "solax",
+    "x1",
+    "rs485",
+    "modbus",
+    "rs232"
+  ],
+  "license": "MIT",
   "main": "main.js",
+  "name": "iobroker.solax-x1-mini-rs485",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485.git"
+  },
   "scripts": {
+    "lint": "eslint",
+    "test": "npm run test:js && npm run test:package",
+    "test:integration": "mocha test/integration --exit",
     "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
-    "test:integration": "mocha test/integration --exit",
-    "test": "npm run test:js && npm run test:package",
-    "lint": "eslint"
+    "test:unit": "mocha test/unit --exit"
   },
-  "bugs": {
-    "url": "https://github.com/Andy200877/ioBroker.solax-x1-mini-rs485/issues"
-  },
-  "readmeFilename": "README.md"
+  "version": "0.0.5"
 }
