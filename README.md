@@ -47,6 +47,14 @@ RJ45 Pin 7 (Braun-Weiß) <--> Adapter Anschluss GND
 
 ## Changelog
 
+### 0.0.5
+* (Andreas Borchert) Add Error Message JSON 
+### 0.0.4
+* (Andreas Borchert) set objekts to 0 when inverter offline
+### 0.0.3
+* (Andreas Borchert) small changes
+### 0.0.2
+* (Andreas Borchert) bug fixes
 ### 0.0.1
 * (Andreas Borchert) initial release
 
